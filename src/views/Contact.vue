@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { utils } from "../utils";
 import { reactive, toRefs, watch } from "vue";
 import _ from "lodash";
 export default {
@@ -144,6 +144,7 @@ export default {
     return {
       preview_origin: null,
       preview_golden: null,
+      images: [],
     };
   },
   methods: {
@@ -165,21 +166,23 @@ export default {
     },
 
     submit: function () {
-      var base64_origin = this.preview_origin.split(",")[1];
-      var base64_golden = this.preview_golden.split(",")[1];
+      const base64_origin = this.preview_origin.split(",")[1];
+      const base64_golden = this.preview_golden.split(",")[1];
 
-      console.log(this.preview_origin);
-      axios({
-        method: "POST",
-        url: "http://localhost:5000/uploadImage/",
+      const { sendImage } = utils;
 
-        data: {
-          num1: 111,
-          origin_image: base64_origin,
-          golden_image: base64_golden,
-        },
+      sendImage({
+        origin_image: base64_origin,
+        golden_image: base64_golden,
       }).then((res) => {
         console.log(res);
+        console.log(res.data);
+        const prefix = "data:image/png;base64,";
+        const resultObj = res.data;
+        // add prefix
+        resultObj.forEach((element, key) => {
+          resultObj[key] = `${prefix}element`;
+        });
         //this.$router.push({ path: 'report' })
       });
     },
