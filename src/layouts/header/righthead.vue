@@ -15,7 +15,7 @@ export default {
     try {
       //Check availability
       imgsrc = ref(
-        'https://wr-images.chinatimes.com/newsphoto/2022-10-19/1024/20221019900650.jpg'
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/ASML_Holding_N.V._logo.svg/1200px-ASML_Holding_N.V._logo.svg.png'
       )
     } catch (error) {
       console.error(error)
@@ -29,6 +29,7 @@ export default {
 
 <style scoped>
 img {
-  width: 100%;
+  width: 93%;
+  margin-top: 160px;
 }
 </style>

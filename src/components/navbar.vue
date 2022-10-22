@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light fixed-top bgwhite py-3">
+  <nav class="navbar navbar-expand-sm navbar-light fixed-top bgwhite py-2">
     <div class="container-fluid">
       <button
         class="navbar-toggler"

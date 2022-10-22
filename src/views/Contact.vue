@@ -1,10 +1,10 @@
 <template>
   <div class="content pt-sm-5 bg-custom">
-    <div class="container-fluid pt-5 mt-5">
+    <div class="container-fluid pt-5 mt-3">
       <div class="row p-5 text-light">
         <!-- Contact Title -->
         <!-- Column -->
-        <div class="col-sm text-start">
+        <div class="col-sm text-start mx-5">
           <div class="row">
             <!-- Contact Form -->
             <form @submit.prevent="valide">
@@ -262,6 +262,6 @@ export default {
 
 <style scoped>
 .bg-custom {
-  background-image: linear-gradient(to right, #333, #9e426e);
+  background-image: linear-gradient(to right, rgb(177, 177, 215), #4d58d8);
 }
 </style>
