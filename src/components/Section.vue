@@ -1,8 +1,10 @@
 <template>
   <!-- View More -->
   <div class="my-5">
-    <a href="#" class="text-center text-decoration-none text-pin fw-bold"
-      >View more >></a
+    <a
+      href="https://2022.meichuhackathon.org/ASML.pdf"
+      class="text-center text-decoration-none text-pin fw-bold"
+      >Official Document</a
     >
   </div>
 </template>

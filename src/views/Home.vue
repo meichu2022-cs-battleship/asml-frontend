@@ -44,12 +44,12 @@ export default {
   background-size: cover;
 }
 .lefthead {
-  padding-top: 15%;
+  padding-top: 9%;
 }
 
 @media screen and (max-width: 850px) {
   .lefthead {
-    padding-top: 15%;
+    padding-top: 9%;
   }
 }
 </style>

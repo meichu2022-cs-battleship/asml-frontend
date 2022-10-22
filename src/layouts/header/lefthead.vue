@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 div {
-  padding: 8px;
+  padding: 2px;
 }
 
 p:first-child {
