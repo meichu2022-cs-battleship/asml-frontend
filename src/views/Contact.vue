@@ -180,10 +180,15 @@ export default {
         const prefix = "data:image/png;base64,";
         const resultObj = res.data;
         // add prefix
-        resultObj.forEach((element, key) => {
-          resultObj[key] = `${prefix}element`;
+        Object.keys(resultObj).forEach((key) => {
+          resultObj[key] = `${prefix}${resultObj[key]}`;
         });
-        //this.$router.push({ path: 'report' })
+        this.$router.push({
+          name: "Result",
+          params: {
+            data: resultObj,
+          },
+        });
       });
     },
   },
