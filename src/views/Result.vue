@@ -9,62 +9,65 @@
           <h4 class="text-capitalize text-start mt-5 mb-3 style fw-bold">
             What is MK template
           </h4>
-          <p class="text-other">
-            Questo testo ha uno stile con alcune delle proprietà di
-            formattazione del testo. L'intestazione utilizza le proprietà di
-            allineamento del testo, trasformazione del testo e colore. Il
-            paragrafo è rientrato, allineato e viene specificato lo spazio tra i
-            caratteri. La sottolineatura viene rimossa da questo colore.Questo
-            testo ha uno stile con alcune delle proprietà di formattazione del
-            testo. L'intestazione utilizza le proprietà di allineamento del
-            testo, trasformazione del testo e colore. Il paragrafo è rientrato,
-            allineato e viene specificato lo spazio tra i caratteri. La
-            sottolineatura viene rimossa da questo colore.
-          </p>
+          <img :src="this.golden_image" />
+          <img :src="this.defect_image" />
+          <img :src="this.sem_gds" />
+          <img :src="this.sem_gds_r_rect" />
+          <img :src="this.sem_gds_g_rect" />
+          <img :src="this.sem_gds_rg_rect" />
+          <img :src="this.sem_r_rect" />
+          <img :src="this.sem_g_rect" />
+          <img :src="this.sem_rg_rect" />
           <a
             href="https://github.com/mohammedmoutawakkil/MKTemplate"
             class="btn text-uppercase text-light fw-bold px-sm-4 py-sm-3 Stars"
             >Github Star</a
           >
         </div>
-        <!-- Column -->
-        <div class="col-sm pb-3 slanted mt-5 mt-md-5 mt-lg-0">
-          <img :src="imgsrc" class="w-100 rounded" alt="about image " />
-          <img :src="data['sem_gds']" />
-        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { ref } from 'vue'
 
 export default {
-  name: "Result",
+  name: 'Result',
   props: {
-    data: {
-      type: Object,
-      default: () => {},
-    },
+    golden_image: String,
+    defect_image: String,
+    sem_gds: String,
+    sem_gds_r_rect: String,
+    sem_gds_g_rect: String,
+    sem_gds_rg_rect: String,
+    sem_r_rect: String,
+    sem_g_rect: String,
+    sem_rg_rect: String
   },
+  //props: {
+  //  data: {
+  //    type: Object,
+  //    default: () => {}
+  //  }
+  //},
   setup() {
     // Image source
-    let imgsrc;
+    let imgsrc
 
     try {
       //Check availability
-      imgsrc = ref(require("@/assets/images/about.jpg"));
+      imgsrc = ref(require('@/assets/images/about.jpg'))
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
     return {
-      imgsrc,
-    };
+      imgsrc
+    }
   },
   mounted() {
-    console.log(this.$route);
-  },
-};
+    console.log(this.data)
+  }
+}
 </script>
 
 <style scoped>
@@ -91,5 +94,10 @@ p {
 }
 .slanted > img {
   box-shadow: 10px 7px 10px black;
+}
+
+img {
+  width: 200px;
+  height: 200px;
 }
 </style>
