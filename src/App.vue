@@ -2,9 +2,9 @@
   <router-view />
 </template>
 <script>
-  export default {
-    name: 'App'
-  }
+export default {
+  name: "App",
+};
 </script>
 <style>
 #app {
@@ -14,7 +14,7 @@
   text-align: center;
   color: #2c3e50;
 }
-body{
+body {
   padding: 0;
   margin: 0;
 }

@@ -1,19 +1,22 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
 //fontawesome component
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-//fontawesome JS 
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+//fontawesome JS
+import { library } from "@fortawesome/fontawesome-svg-core";
 //fontawesome icons
-import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fas } from "@fortawesome/free-solid-svg-icons";
 //brands icons
-import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fab } from "@fortawesome/free-brands-svg-icons";
 library.add(fas, fab);
 //bootstrap
-import 'bootstrap/scss/bootstrap.scss'
+import "bootstrap/scss/bootstrap.scss";
 // You can specify which plugins you need
-import { Tooltip, Toast, Popover } from 'bootstrap';
+import { Tooltip, Toast, Popover } from "bootstrap";
 
 // Add additional custom code here
-createApp(App).use(router, Tooltip, Toast, Popover).component('fa', FontAwesomeIcon).mount('#app');
+createApp(App)
+  .use(router, Tooltip, Toast, Popover)
+  .component("fa", FontAwesomeIcon)
+  .mount("#app");

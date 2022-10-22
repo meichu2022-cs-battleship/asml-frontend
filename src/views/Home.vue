@@ -2,8 +2,8 @@
   <div class="container-fluid mt-5">
     <!-- Header -->
     <div class="row mb-5">
-      <lefthead class="lefthead col-sm" />
-      <righthead class="mt-5 righthead col-sm" />
+      <lefthead class="lefthead col-sm ps-4" />
+      <righthead class="righthead col-sm d-none d-md-block" />
     </div>
     <!-- Section -->
     <Section
