@@ -47,12 +47,9 @@
           <a href="#" class="mx-4"
             ><fa :icon="['fab', 'facebook']" class="fa fb"
           /></a>
-          <!-- twitter -->
-          <a href="#" class="mx-4"
-            ><fa :icon="['fab', 'twitter']" class="fa tw"
-          /></a>
+
           <!-- github -->
-          <a href="#" class="mx-4"
+          <a href="https://github.com/meichu2022-cs-battleship" class="mx-4"
             ><fa :icon="['fab', 'github']" class="fa gh"
           /></a>
         </div>

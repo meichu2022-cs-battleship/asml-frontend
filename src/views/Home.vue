@@ -1,12 +1,15 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid mt-5">
     <!-- Header -->
     <div class="row mb-5">
-    <lefthead class="lefthead col-sm ps-4"/>
-    <righthead class="righthead col-sm d-none d-md-block "/>
+      <lefthead class="lefthead col-sm" />
+      <righthead class="mt-5 righthead col-sm" />
     </div>
     <!-- Section -->
-    <Section class="row Section-bg" :style="{ 'backgroundImage': 'url(' + imgsrc + ')' }" />
+    <Section
+      class="row Section-bg"
+      :style="{ backgroundImage: 'url(' + imgsrc + ')' }"
+    />
   </div>
 </template>
 <script>
@@ -16,40 +19,37 @@ import Section from '../components/Section.vue'
 import { ref } from 'vue'
 export default {
   name: 'Home',
-  components:{
+  components: {
     righthead,
     lefthead,
     Section
-  }, 
-  setup(){
-            let imgsrc;
-                try{
-                //Check availability
-                    imgsrc=ref(require('@/assets/images/slanted-background.png'))
-                }
-                catch(error){
-                console.error(error);
-                }
-                return{
-                imgsrc
-                }
-        }
+  },
+  setup() {
+    let imgsrc
+    try {
+      //Check availability
+      imgsrc = ref(require('@/assets/images/slanted-background.png'))
+    } catch (error) {
+      console.error(error)
+    }
+    return {
+      imgsrc
+    }
+  }
 }
 </script>
 <style scoped>
-.Section-bg{
-    height: auto;
-    background-size: cover;
+.Section-bg {
+  height: auto;
+  background-size: cover;
 }
-.lefthead{
+.lefthead {
   padding-top: 15%;
 }
 
 @media screen and (max-width: 850px) {
- .lefthead{
-  padding-top: 15%;
+  .lefthead {
+    padding-top: 15%;
+  }
 }
-
-}
-
 </style>
