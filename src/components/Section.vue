@@ -3,7 +3,7 @@
   <div class="my-5">
     <a
       href="https://2022.meichuhackathon.org/ASML.pdf"
-      class="text-center text-decoration-none text-pin fw-bold"
+      class="text-center text-decoration-none text-pin fw-bold mt-2"
       >Official Document</a
     >
   </div>

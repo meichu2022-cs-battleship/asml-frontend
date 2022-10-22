@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p class="text-center text-capitalize fs-1 fw-bold">
-      2022 Meichu Hackathon ASML
+    <p class="text-center text-capitalize fs-1 fw-bold" style="color: #0b1a8c">
+      2022 Meichu Hackathon
     </p>
     <p class="text-secondary">
       ASML作為全球頂尖半導體設備商，通常被定位為硬體公司，然而實際上我們擁有全世界規模最大、最先進的軟體團隊之一，若沒有軟體創新，ASML
@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 div {
-  padding: 2px;
+  padding: 4px;
 }
 
 p:first-child {
@@ -39,8 +39,9 @@ p:first-child {
 p {
   text-align: justify;
   line-height: 1.6;
+  padding: 20px;
 }
 .Stars {
-  background-color: #334155;
+  background-color: #114287;
 }
 </style>

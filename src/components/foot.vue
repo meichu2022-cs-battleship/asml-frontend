@@ -1,5 +1,9 @@
 <template>
-  <div class="container-fluid p-more"></div>
+  <div class="container-fluid p-more">
+    <p class="text-center text-capitalize" style="color: #0b1a8c">
+      交大資工宇宙戰艦
+    </p>
+  </div>
 </template>
 <script>
 import { ref } from 'vue'
@@ -17,15 +21,6 @@ export default {
 
 <style scoped>
 .p-more {
-  padding-top: 200px;
-}
-.btn-pink {
-  background-color: #667eea;
-}
-.btn-pink:hover {
-  background-color: #ed64a6;
-}
-.tw {
-  color: rgb(0, 162, 255);
+  padding-top: 50px;
 }
 </style>

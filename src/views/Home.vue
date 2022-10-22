@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mt-5">
+  <div class="container-fluid mt-5 bg-custom">
     <!-- Header -->
     <div class="row mb-5">
       <lefthead class="lefthead col-sm ps-4" />
@@ -46,7 +46,9 @@ export default {
 .lefthead {
   padding-top: 9%;
 }
-
+.bg-custom {
+  background-image: linear-gradient(to right, rgb(237, 234, 234), #8b93eb);
+}
 @media screen and (max-width: 850px) {
   .lefthead {
     padding-top: 9%;
