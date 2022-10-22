@@ -10,7 +10,13 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto ps-sm-5 ms-sm-5">
+        <ul class="navbar-nav me-auto ms-sm-3">
+          <li class="nav-item">
+            <img
+              class="navbar-nav-svg"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/ASML_Holding_N.V._logo.svg/1200px-ASML_Holding_N.V._logo.svg.png"
+            />
+          </li>
           <!-- Home -->
           <li class="nav-item">
             <router-link
@@ -42,7 +48,7 @@
             >
           </li>
         </ul>
-        <div class="d-sm-flex text-center my-2 my-md-0">
+        <div class="text-center">
           <!-- facebook -->
           <a href="https://www.facebook.com/csnctu/" class="mx-4"
             ><fa :icon="['fab', 'facebook']" class="fa fb"
@@ -55,12 +61,8 @@
         </div>
         <div class="btn-group">
           <!-- Sign in -->
-          <router-link to="/auth/login" class="btn btn hpink" tag="button"
-            >Sign in</router-link
-          >
-          <!-- Sing Up -->
           <router-link to="/auth/login" class="btn btn hblue" tag="button"
-            >Sign Up</router-link
+            >Sign in</router-link
           >
         </div>
       </div>
@@ -121,5 +123,14 @@ nav {
 .nav-item a.router-link-exact-active {
   text-shadow: 1px 8px 9px rgb(41, 40, 40);
   font-family: 'Maven Pro', sans-serif;
+}
+img {
+  height: 20px;
+  width: 78px;
+}
+.navbar-nav-svg {
+  width: 7rem;
+  height: 2rem;
+  margin-right: 10px;
 }
 </style>
