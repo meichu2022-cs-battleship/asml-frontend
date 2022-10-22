@@ -135,121 +135,121 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { reactive, toRefs, watch } from 'vue'
-import _ from 'lodash'
+import axios from "axios";
+import { reactive, toRefs, watch } from "vue";
+import _ from "lodash";
 export default {
-  name: 'Contact',
+  name: "Contact",
   data() {
     return {
       preview_origin: null,
-      preview_golden: null
-    }
+      preview_golden: null,
+    };
   },
   methods: {
     previewImage: function (event, flag) {
-      var input = event.target
+      var input = event.target;
       if (input.files) {
-        var reader = new FileReader()
+        var reader = new FileReader();
 
         reader.onload = (e) => {
           if (flag == 1) {
-            this.preview_origin = e.target.result
+            this.preview_origin = e.target.result;
           } else {
-            this.preview_golden = e.target.result
+            this.preview_golden = e.target.result;
           }
-        }
+        };
 
-        reader.readAsDataURL(input.files[0])
+        reader.readAsDataURL(input.files[0]);
       }
     },
 
     submit: function () {
-      var base64_origin = this.preview_origin.split(',')[1]
-      var base64_golden = this.preview_golden.split(',')[1]
+      var base64_origin = this.preview_origin.split(",")[1];
+      var base64_golden = this.preview_golden.split(",")[1];
 
-      console.log(this.preview_origin)
+      console.log(this.preview_origin);
       axios({
-        method: 'POST',
-        url: 'http://localhost:5000/uploadImage/',
+        method: "POST",
+        url: "http://localhost:5000/uploadImage/",
 
         data: {
           num1: 111,
           origin_image: base64_origin,
-          golden_image: base64_golden
-        }
+          golden_image: base64_golden,
+        },
       }).then((res) => {
-        console.log(res)
+        console.log(res);
         //this.$router.push({ path: 'report' })
-      })
-    }
+      });
+    },
   },
   setup() {
     //form values
     const formvalidation = reactive({
       fullname: {
-        fnvalue: '',
-        fnerror: false
+        fnvalue: "",
+        fnerror: false,
       },
       images: {
         preview_origin: null,
-        preview_golden: null
+        preview_golden: null,
       },
       email: {
-        emailvalue: '',
-        emailerror: false
+        emailvalue: "",
+        emailerror: false,
       },
       subjet: {
-        sjvalue: '',
-        sjerror: false
+        sjvalue: "",
+        sjerror: false,
       },
       message: {
-        msgvalue: '',
-        msgerror: false
-      }
-    })
+        msgvalue: "",
+        msgerror: false,
+      },
+    });
     //regex validation
     const mailformat = new RegExp(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )
+    );
     watch(
       () => _.cloneDeep(formvalidation.email),
       (newvalue) => {
-        if (!mailformat.test(newvalue.emailvalue) && newvalue.emailvalue !== '')
-          formvalidation.email.emailerror = true
-        else formvalidation.email.emailerror = false
+        if (!mailformat.test(newvalue.emailvalue) && newvalue.emailvalue !== "")
+          formvalidation.email.emailerror = true;
+        else formvalidation.email.emailerror = false;
       },
       { deep: true }
-    )
+    );
     //form submit
     function valide() {
-      if (formvalidation.fullname.fnvalue === '') {
-        formvalidation.fullname.fnerror = true
+      if (formvalidation.fullname.fnvalue === "") {
+        formvalidation.fullname.fnerror = true;
       } else {
-        formvalidation.fullname.fnerror = false
+        formvalidation.fullname.fnerror = false;
       }
-      if (formvalidation.email.emailvalue === '') {
-        formvalidation.email.emailerror = true
+      if (formvalidation.email.emailvalue === "") {
+        formvalidation.email.emailerror = true;
       } else {
-        formvalidation.email.emailerror = false
+        formvalidation.email.emailerror = false;
       }
-      if (formvalidation.subjet.sjvalue === '') {
-        formvalidation.subjet.sjerror = true
+      if (formvalidation.subjet.sjvalue === "") {
+        formvalidation.subjet.sjerror = true;
       } else {
-        formvalidation.subjet.sjerror = false
+        formvalidation.subjet.sjerror = false;
       }
-      if (formvalidation.message.msgvalue === '') {
-        formvalidation.message.msgerror = true
+      if (formvalidation.message.msgvalue === "") {
+        formvalidation.message.msgerror = true;
       } else {
-        formvalidation.message.msgerror = false
+        formvalidation.message.msgerror = false;
       }
     }
     return {
       ...toRefs(formvalidation),
-      valide
-    }
-  }
-}
+      valide,
+    };
+  },
+};
 </script>
 
 <style scoped>
