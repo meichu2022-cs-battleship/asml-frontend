@@ -1,129 +1,259 @@
 <template>
   <div class="content pt-sm-5 bg-custom">
     <div class="container-fluid pt-5 mt-5">
-    <div class="row p-5 text-light">
+      <div class="row p-5 text-light">
         <!-- Contact Title -->
-        <h1 class="title text-start fw-bold ">Contact Us</h1>
         <!-- Column -->
-            <div class="col-sm text-start">
-                <div class="row py-5">
-                    <!-- Contact Form -->
-                    <form @submit.prevent="valide">
-                        <!-- Full Name -->
-                        <div class="col-sm-8 mb-3">
-                            <label for="exampleFormControlInput0" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput0" placeholder="Full Name" v-model="fullname.fnvalue">
-                            <small v-show="fullname.fnerror" class="form-text  text-danger">Name required.</small>
-                        </div>
-                        <!-- Email Address -->
-                        <div class="col-sm-8 mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" v-model="email.emailvalue" required>
-                            <small v-show="email.emailerror" class="form-text  text-danger">Incorrect Email Address.</small>
-                        </div>
-                        <!-- Subject -->
-                        <div class="col-sm-8 mb-3">
-                            <label for="exampleFormControlInput2" class="form-label">Subjet</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Subjet" v-model="subjet.sjvalue">
-                            <small v-show="subjet.sjerror" class="form-text  text-danger">Subjet required.</small>
-                        </div>
-                        <!-- Message -->
-                        <div class="col-sm-8 mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Message" v-model="message.msgvalue"></textarea>
-                            <small v-show="message.msgerror" class="form-text  text-danger">Message required.</small>
-                        </div>
-                        <!-- Submit -->
-                        <button type="submit" class="btn btn-secondary"><fa :icon="['fas','save']" class="me-2"/>Submit</button>
-                    </form>
+        <div class="col-sm text-start">
+          <div class="row">
+            <!-- Contact Form -->
+            <form @submit.prevent="valide">
+              <!-- Full Name -->
+              <div class="col-sm-8 mb-3">
+                <h1 class="title text-start fw-bold">
+                  Upload your image & see the result
+                </h1>
+                <label for="exampleFormControlInput0" class="form-label"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="exampleFormControlInput0"
+                  placeholder="Full Name"
+                  v-model="fullname.fnvalue"
+                />
+              </div>
+              <!-- Email Address -->
+              <div class="col-sm-8 mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="name@example.com"
+                  v-model="email.emailvalue"
+                />
+                <small v-show="email.emailerror" class="form-text text-danger"
+                  >Incorrect Email Address.</small
+                >
+              </div>
+              <!-- Image -->
+              <div class="row">
+                <div class="mb-3 mx-1 col">
+                  <label for="image" class="form-label"
+                    >Your golden image</label
+                  >
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="previewImage($event, 2)"
+                  />
                 </div>
-            </div>
-            <!-- Column -->
-            <div class="col-sm pb-3">
-                <!-- Location -->
-                <iframe class="h-100 w-100 rounded shadow" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105994.76966671569!2d-5.608060329985909!3d33.88098518728597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda044d23bfc49d1%3A0xfbbf80a99e4cde18!2sMeknes!5e0!3m2!1sen!2sma!4v1634761905079!5m2!1sen!2sma"    allowfullscreen="" loading="lazy"></iframe>
-            </div>
+                <div class="mb-3 mx-2 col">
+                  <label for="image" class="form-label"
+                    >Your defect image
+                  </label>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="previewImage($event, 1)"
+                  />
+                </div>
+              </div>
+              <!-- Message -->
+              <div class="col-sm-8 mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label"
+                  >Message</label
+                >
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="5"
+                  placeholder="Message"
+                  v-model="message.msgvalue"
+                ></textarea>
+              </div>
+              <!-- Submit -->
+              <button
+                type="submit"
+                class="btn btn-secondary"
+                v-on:click="submit"
+              >
+                <fa :icon="['fas', 'save']" class="me-2" />Submit
+              </button>
+            </form>
+          </div>
+        </div>
+        <!-- Column -->
+        <div
+          class="
+            col-sm
+            pb-1
+            d-flex
+            flex-column
+            justify-content-center
+            align-items-center
+          "
+        >
+          <!-- Location -->
+          <div class="mb-3">
+            <div>Golden Image</div>
+            <img
+              v-if="preview_golden"
+              class="w-50 rounded shadow"
+              :src="preview_golden"
+            />
+            <img
+              v-else
+              class="w-50 rounded shadow"
+              src="https://dummyimage.com/1024x1024/9e969e/e2e4f5.png&text=Please+upload+your+Golden+Image"
+            />
+          </div>
+
+          <div>
+            <div>Image with Defect</div>
+            <img
+              v-if="preview_origin"
+              class="w-50 rounded shadow"
+              :src="preview_origin"
+            />
+            <img
+              v-else
+              class="w-50 rounded shadow"
+              src="https://dummyimage.com/1024x1024/9e969e/e2e4f5.png&text=Please+upload+your+Image+with+Defect"
+            />
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { reactive, toRefs, watch } from 'vue'
 import _ from 'lodash'
-    export default {
-        name:'Contact',
-        setup(){
-            //form values
-            const formvalidation=reactive({
-                fullname:{
-                    fnvalue:'',
-                    fnerror:false
-                },
-                email:{
-                    emailvalue:'',
-                    emailerror:false
-                },
-                subjet:{
-                    sjvalue:'',
-                    sjerror:false
-                },
-                message:{
-                    msgvalue:'',
-                    msgerror:false
-                }
-
-            })
-            //regex validation
-            const mailformat =new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-               watch(
-               () =>_.cloneDeep(formvalidation.email),
-                   (newvalue)=>{
-                       if (!mailformat.test(newvalue.emailvalue)&&newvalue.emailvalue!=='')
-                        formvalidation.email.emailerror=true
-                       else 
-                        formvalidation.email.emailerror=false
-            },
-            {deep:true}
-            )
-            //form submit
-            function valide(){
-                if (formvalidation.fullname.fnvalue==='') {
-                    formvalidation.fullname.fnerror=true
-                }
-                else{
-                     formvalidation.fullname.fnerror=false
-                }
-                if (formvalidation.email.emailvalue==='') {
-                    formvalidation.email.emailerror=true
-                }
-                else{
-                     formvalidation.email.emailerror=false
-                }
-                if (formvalidation.subjet.sjvalue==='') {
-                    formvalidation.subjet.sjerror=true
-                }
-                else{
-                     formvalidation.subjet.sjerror=false
-                }
-                if (formvalidation.message.msgvalue==='') {
-                    formvalidation.message.msgerror=true
-                }
-                else{
-                    formvalidation.message.msgerror=false
-                }
-            }
-            return{
-                ...toRefs(formvalidation),
-                valide
-            }
-        }
+export default {
+  name: 'Contact',
+  data() {
+    return {
+      preview_origin: null,
+      preview_golden: null
     }
+  },
+  methods: {
+    previewImage: function (event, flag) {
+      var input = event.target
+      if (input.files) {
+        var reader = new FileReader()
+
+        reader.onload = (e) => {
+          if (flag == 1) {
+            this.preview_origin = e.target.result
+          } else {
+            this.preview_golden = e.target.result
+          }
+        }
+
+        reader.readAsDataURL(input.files[0])
+      }
+    },
+
+    submit: function () {
+      var base64_origin = this.preview_origin.split(',')[1]
+      var base64_golden = this.preview_golden.split(',')[1]
+
+      console.log(this.preview_origin)
+      axios({
+        method: 'POST',
+        url: 'http://localhost:5000/uploadImage/',
+
+        data: {
+          num1: 111,
+          origin_image: base64_origin,
+          golden_image: base64_golden
+        }
+      }).then((res) => {
+        console.log(res)
+        //this.$router.push({ path: 'report' })
+      })
+    }
+  },
+  setup() {
+    //form values
+    const formvalidation = reactive({
+      fullname: {
+        fnvalue: '',
+        fnerror: false
+      },
+      images: {
+        preview_origin: null,
+        preview_golden: null
+      },
+      email: {
+        emailvalue: '',
+        emailerror: false
+      },
+      subjet: {
+        sjvalue: '',
+        sjerror: false
+      },
+      message: {
+        msgvalue: '',
+        msgerror: false
+      }
+    })
+    //regex validation
+    const mailformat = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+    watch(
+      () => _.cloneDeep(formvalidation.email),
+      (newvalue) => {
+        if (!mailformat.test(newvalue.emailvalue) && newvalue.emailvalue !== '')
+          formvalidation.email.emailerror = true
+        else formvalidation.email.emailerror = false
+      },
+      { deep: true }
+    )
+    //form submit
+    function valide() {
+      if (formvalidation.fullname.fnvalue === '') {
+        formvalidation.fullname.fnerror = true
+      } else {
+        formvalidation.fullname.fnerror = false
+      }
+      if (formvalidation.email.emailvalue === '') {
+        formvalidation.email.emailerror = true
+      } else {
+        formvalidation.email.emailerror = false
+      }
+      if (formvalidation.subjet.sjvalue === '') {
+        formvalidation.subjet.sjerror = true
+      } else {
+        formvalidation.subjet.sjerror = false
+      }
+      if (formvalidation.message.msgvalue === '') {
+        formvalidation.message.msgerror = true
+      } else {
+        formvalidation.message.msgerror = false
+      }
+    }
+    return {
+      ...toRefs(formvalidation),
+      valide
+    }
+  }
+}
 </script>
 
 <style scoped>
-.bg-custom{
-    background-image: linear-gradient(to right,#333,#9E426E);
+.bg-custom {
+  background-image: linear-gradient(to right, #333, #9e426e);
 }
-
 </style>
