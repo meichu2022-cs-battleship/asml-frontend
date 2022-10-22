@@ -42,9 +42,9 @@
             >
           </li>
         </ul>
-        <div class="d-sm-flex text-center pe-sm-5 me-sm-5 my-4 my-md-0">
+        <div class="d-sm-flex text-center my-2 my-md-0">
           <!-- facebook -->
-          <a href="#" class="mx-4"
+          <a href="https://www.facebook.com/csnctu/" class="mx-4"
             ><fa :icon="['fab', 'facebook']" class="fa fb"
           /></a>
 

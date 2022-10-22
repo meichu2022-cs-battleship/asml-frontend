@@ -110,9 +110,41 @@ import { ref } from "vue";
 export default {
   name: "Result",
   props: {
-    data: {
-      type: Object,
-      default: () => {},
+    golden_image: {
+      type: String,
+      default: "",
+    },
+    defect_image: {
+      type: String,
+      default: "",
+    },
+    sem_gds: {
+      type: String,
+      default: "",
+    },
+    sem_gds_r_rect: {
+      type: String,
+      default: "",
+    },
+    sem_gds_g_rect: {
+      type: String,
+      default: "",
+    },
+    sem_gds_rg_rect: {
+      type: String,
+      default: "",
+    },
+    sem_r_rect: {
+      type: String,
+      default: "",
+    },
+    sem_g_rect: {
+      type: String,
+      default: "",
+    },
+    sem_rg_rect: {
+      type: String,
+      default: "",
     },
   },
   data() {
@@ -227,5 +259,9 @@ p {
 .main-image {
   width: 100%;
   object-fit: contain;
+}
+.sample-img {
+  width: 200px;
+  height: 200px;
 }
 </style>
