@@ -1,6 +1,6 @@
 <template>
   <div class="content pt-sm-5 bg-custom">
-    <div class="container-fluid pt-5 mt-3">
+    <div class="container-fluid pt-3">
       <div class="row p-5 text-light">
         <!-- Contact Title -->
         <!-- Column -->
@@ -9,10 +9,10 @@
             <!-- Contact Form -->
             <form @submit.prevent="valide">
               <!-- Full Name -->
+              <h1 class="title text-start fw-bold">
+                Upload your image check the result on our web and both on email
+              </h1>
               <div class="col-sm-8 mb-3">
-                <h1 class="title text-start fw-bold">
-                  Upload your image & see the result
-                </h1>
                 <label for="exampleFormControlInput0" class="form-label"
                   >Your Name</label
                 >
@@ -111,7 +111,7 @@
             <img
               v-else
               class="w-50 rounded shadow"
-              src="https://dummyimage.com/1024x1024/9e969e/e2e4f5.png&text=Please+upload+your+Golden+Image"
+              src="https://dummyimage.com/1024x1024/9e969e/e2e4f5.png&text=your+golden+Image"
             />
           </div>
 
@@ -125,7 +125,7 @@
             <img
               v-else
               class="w-50 rounded shadow"
-              src="https://dummyimage.com/1024x1024/9e969e/e2e4f5.png&text=Please+upload+your+Image+with+Defect"
+              src="https://dummyimage.com/1024x1024/9e969e/e2e4f5.png&text=your+Image+with+Defect"
             />
           </div>
         </div>
