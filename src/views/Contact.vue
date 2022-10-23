@@ -16,11 +16,11 @@
             <form class="w-75" @submit.prevent="valide">
               <!-- Full Name -->
               <h1 class="title text-start fw-bold">
-                Start your inspection trip HERE!
+                Semiconductor Inspect Detection
               </h1>
 
               <div>
-                <p>Please upload the image for defect inspection.</p>
+                <p>Please upload the image of semiconductors for defect inspection.</p>
                 <p><b>TWO</b> images have to be provided.
                   <ul>
                     <li>The image that contains defect</li>
@@ -59,8 +59,8 @@
               </div>
               <!-- Email Address -->
               <div>
-                <h3>Email Report</h3>
-                <p>If you would like to recieve an email report, please fill in your info below.</p>
+                <h3>Email Summary</h3>
+                <p>If you would like to recieve an email summary of the inspection, please fill in your info below.</p>
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlInput0" class="form-label"

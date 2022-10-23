@@ -34,7 +34,7 @@
               class="nav-link fw-bold"
               tag="button"
               active-class="active"
-              >Upload Images</router-link
+              >Defect Inspection</router-link
             >
           </li>
           <!-- About Us -->
@@ -72,15 +72,15 @@
 
 <script>
 export default {
-  name: 'navbar',
+  name: "navbar",
   setup() {
-    return {}
-  }
-}
+    return {};
+  },
+};
 </script>
 
-<style  scoped>
-@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&display=swap');
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&display=swap");
 .bgwhite {
   background-color: white;
 }
@@ -122,7 +122,7 @@ nav {
 }
 .nav-item a.router-link-exact-active {
   text-shadow: 1px 8px 9px rgb(41, 40, 40);
-  font-family: 'Maven Pro', sans-serif;
+  font-family: "Maven Pro", sans-serif;
 }
 img {
   height: 20px;
