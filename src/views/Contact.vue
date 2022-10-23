@@ -1,5 +1,11 @@
 <template>
   <div class="content pt-sm-5 bg-custom">
+    <div class="overlay" v-if="loading">
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <br/>
+    </div>
     <div class="container-fluid pt-3">
       <div class="row p-5 text-light">
         <!-- Contact Title -->
@@ -165,6 +171,7 @@ export default {
       preview_origin: null,
       preview_golden: null,
       images: [],
+      loading: false,
     };
   },
   methods: {
@@ -190,7 +197,7 @@ export default {
       const base64_golden = this.preview_golden.split(",")[1];
 
       const { sendImage } = utils;
-
+      this.loading = true;
       sendImage({
         origin_image: base64_origin,
         golden_image: base64_golden,
@@ -203,6 +210,7 @@ export default {
         Object.keys(resultObj).forEach((key) => {
           resultObj[key] = `${prefix}${resultObj[key]}`;
         });
+        this.loading = false;
         this.$router.push({
           name: "Result",
           params: {
@@ -216,6 +224,9 @@ export default {
             sem_g_rect: resultObj["sem_g_rect"],
             sem_rg_rect: resultObj["sem_rg_rect"],
           },
+        }).catch((error)=> {
+          this.loading = false;
+          console.error(error);
         });
       });
     },
@@ -294,5 +305,16 @@ export default {
 }
 .btn-asml {
   background-color: #0F238C;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 150vh;
+  background-color: black;
+  opacity: 0.5;
 }
 </style>
