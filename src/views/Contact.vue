@@ -5,17 +5,61 @@
         <!-- Contact Title -->
         <!-- Column -->
         <div class="col-sm text-start mx-5">
-          <div class="row">
+          <div class="row justify-content-center">
             <!-- Contact Form -->
-            <form @submit.prevent="valide">
+            <form class="w-75" @submit.prevent="valide">
               <!-- Full Name -->
               <h1 class="title text-start fw-bold">
-                Upload your image check the result on our web and both on email
+                Start your inspection trip HERE!
               </h1>
-              <div class="col-sm-8 mb-3">
+
+              <div>
+                <p>Please upload the image for defect inspection.</p>
+                <p><b>TWO</b> images have to be provided.
+                  <ul>
+                    <li>The image that contains defect</li>
+                    <li>The corresponding golden image</li>
+                    
+                  </ul>
+                </p>
+                <p>
+                  The defects will be highlighted in the result.
+                </p>
+              </div>
+              <!-- Image -->
+              <div class="row">
+                <div class="mb-3 mx-1 col">
+                  <label for="image" class="form-label"
+                    ><b>Your golden image:</b></label
+                  >
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="previewImage($event, 2)"
+                  />
+                </div>
+                <div class="mb-3 mx-1 col">
+                  <label for="image" class="form-label"
+                    ><b>Your defect image:</b>&nbsp;
+                  </label>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="previewImage($event, 1)"
+                  />
+                </div>
+              </div>
+              <!-- Email Address -->
+              <div>
+                <h3>Email Report</h3>
+                <p>If you would like to recieve an email report, please fill in your info below.</p>
+              </div>
+              <div class="mb-3">
                 <label for="exampleFormControlInput0" class="form-label"
-                  >Your Name</label
-                >
+                  >Your Name <small>(optional)</small>
+                </label>
                 <input
                   type="text"
                   class="form-control"
@@ -24,10 +68,9 @@
                   v-model="fullname.fnvalue"
                 />
               </div>
-              <!-- Email Address -->
-              <div class="col-sm-8 mb-3">
+              <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"
-                  >Email address</label
+                  >Email address <small>(optional)</small></label
                 >
                 <input
                   type="email"
@@ -40,31 +83,6 @@
                   >Incorrect Email Address.</small
                 >
               </div>
-              <!-- Image -->
-              <div class="row">
-                <div class="mb-3 mx-1 col">
-                  <label for="image" class="form-label"
-                    >Your golden image</label
-                  >
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    @change="previewImage($event, 2)"
-                  />
-                </div>
-                <div class="mb-3 mx-1 col">
-                  <label for="image" class="form-label"
-                    >Your defect image&nbsp;
-                  </label>
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    @change="previewImage($event, 1)"
-                  />
-                </div>
-              </div>
               <!-- Message -->
               <div class="col-sm-8 mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label"
@@ -73,19 +91,21 @@
                 <textarea
                   class="form-control"
                   id="exampleFormControlTextarea1"
-                  rows="5"
+                  rows="2"
                   placeholder="Message"
                   v-model="message.msgvalue"
                 ></textarea>
               </div>
               <!-- Submit -->
-              <button
+              <div class="d-flex justify-content-center">
+                <button
                 type="submit"
-                class="btn btn-secondary"
+                class="btn btn-primary px-5 py-2"
                 v-on:click="submit"
               >
-                <fa :icon="['fas', 'save']" class="me-2" />Submit
+                Detect!
               </button>
+              </div>
             </form>
           </div>
         </div>
@@ -135,141 +155,144 @@
 </template>
 
 <script>
-import { utils } from '../utils'
-import { reactive, toRefs, watch } from 'vue'
-import _ from 'lodash'
+import { utils } from "../utils";
+import { reactive, toRefs, watch } from "vue";
+import _ from "lodash";
 export default {
-  name: 'Contact',
+  name: "Contact",
   data() {
     return {
       preview_origin: null,
       preview_golden: null,
-      images: []
-    }
+      images: [],
+    };
   },
   methods: {
     previewImage: function (event, flag) {
-      var input = event.target
+      var input = event.target;
       if (input.files) {
-        var reader = new FileReader()
+        var reader = new FileReader();
 
         reader.onload = (e) => {
           if (flag == 1) {
-            this.preview_origin = e.target.result
+            this.preview_origin = e.target.result;
           } else {
-            this.preview_golden = e.target.result
+            this.preview_golden = e.target.result;
           }
-        }
+        };
 
-        reader.readAsDataURL(input.files[0])
+        reader.readAsDataURL(input.files[0]);
       }
     },
 
     submit: function () {
-      const base64_origin = this.preview_origin.split(',')[1]
-      const base64_golden = this.preview_golden.split(',')[1]
+      const base64_origin = this.preview_origin.split(",")[1];
+      const base64_golden = this.preview_golden.split(",")[1];
 
-      const { sendImage } = utils
+      const { sendImage } = utils;
 
       sendImage({
         origin_image: base64_origin,
-        golden_image: base64_golden
+        golden_image: base64_golden,
       }).then((res) => {
         //console.log(res)
         //console.log('check:', res.data)
-        const prefix = 'data:image/png;base64,'
-        const resultObj = res.data
+        const prefix = "data:image/png;base64,";
+        const resultObj = res.data;
         // add prefix
         Object.keys(resultObj).forEach((key) => {
-          resultObj[key] = `${prefix}${resultObj[key]}`
-        })
+          resultObj[key] = `${prefix}${resultObj[key]}`;
+        });
         this.$router.push({
-          name: 'Result',
+          name: "Result",
           params: {
             golden_image: `${prefix}${base64_golden}`,
             defect_image: `${prefix}${base64_origin}`,
-            sem_gds: resultObj['sem_gds'],
-            sem_gds_r_rect: resultObj['sem_gds_r_rect'],
-            sem_gds_g_rect: resultObj['sem_gds_g_rect'],
-            sem_gds_rg_rect: resultObj['sem_gds_rg_rect'],
-            sem_r_rect: resultObj['sem_r_rect'],
-            sem_g_rect: resultObj['sem_g_rect'],
-            sem_rg_rect: resultObj['sem_rg_rect']
-          }
-        })
-      })
-    }
+            sem_gds: resultObj["sem_gds"],
+            sem_gds_r_rect: resultObj["sem_gds_r_rect"],
+            sem_gds_g_rect: resultObj["sem_gds_g_rect"],
+            sem_gds_rg_rect: resultObj["sem_gds_rg_rect"],
+            sem_r_rect: resultObj["sem_r_rect"],
+            sem_g_rect: resultObj["sem_g_rect"],
+            sem_rg_rect: resultObj["sem_rg_rect"],
+          },
+        });
+      });
+    },
   },
   setup() {
     //form values
     const formvalidation = reactive({
       fullname: {
-        fnvalue: '',
-        fnerror: false
+        fnvalue: "",
+        fnerror: false,
       },
       images: {
         preview_origin: null,
-        preview_golden: null
+        preview_golden: null,
       },
       email: {
-        emailvalue: '',
-        emailerror: false
+        emailvalue: "",
+        emailerror: false,
       },
       subjet: {
-        sjvalue: '',
-        sjerror: false
+        sjvalue: "",
+        sjerror: false,
       },
       message: {
-        msgvalue: '',
-        msgerror: false
-      }
-    })
+        msgvalue: "",
+        msgerror: false,
+      },
+    });
     //regex validation
     const mailformat = new RegExp(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )
+    );
     watch(
       () => _.cloneDeep(formvalidation.email),
       (newvalue) => {
-        if (!mailformat.test(newvalue.emailvalue) && newvalue.emailvalue !== '')
-          formvalidation.email.emailerror = true
-        else formvalidation.email.emailerror = false
+        if (!mailformat.test(newvalue.emailvalue) && newvalue.emailvalue !== "")
+          formvalidation.email.emailerror = true;
+        else formvalidation.email.emailerror = false;
       },
       { deep: true }
-    )
+    );
     //form submit
     function valide() {
-      if (formvalidation.fullname.fnvalue === '') {
-        formvalidation.fullname.fnerror = true
+      if (formvalidation.fullname.fnvalue === "") {
+        formvalidation.fullname.fnerror = true;
       } else {
-        formvalidation.fullname.fnerror = false
+        formvalidation.fullname.fnerror = false;
       }
-      if (formvalidation.email.emailvalue === '') {
-        formvalidation.email.emailerror = true
+      if (formvalidation.email.emailvalue === "") {
+        formvalidation.email.emailerror = true;
       } else {
-        formvalidation.email.emailerror = false
+        formvalidation.email.emailerror = false;
       }
-      if (formvalidation.subjet.sjvalue === '') {
-        formvalidation.subjet.sjerror = true
+      if (formvalidation.subjet.sjvalue === "") {
+        formvalidation.subjet.sjerror = true;
       } else {
-        formvalidation.subjet.sjerror = false
+        formvalidation.subjet.sjerror = false;
       }
-      if (formvalidation.message.msgvalue === '') {
-        formvalidation.message.msgerror = true
+      if (formvalidation.message.msgvalue === "") {
+        formvalidation.message.msgerror = true;
       } else {
-        formvalidation.message.msgerror = false
+        formvalidation.message.msgerror = false;
       }
     }
     return {
       ...toRefs(formvalidation),
-      valide
-    }
-  }
-}
+      valide,
+    };
+  },
+};
 </script>
 
 <style scoped>
 .bg-custom {
   background-image: linear-gradient(to right, rgb(177, 177, 215), #4d58d8);
+}
+.btn-asml {
+  background-color: #0F238C;
 }
 </style>
