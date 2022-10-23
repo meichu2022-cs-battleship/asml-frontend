@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mt-5 bg-custom">
+  <div class="container-fluid mt-5 py-5 bg-custom h-100">
     <!-- Header -->
     <div class="row mb-5">
       <lefthead class="lefthead col-sm ps-4" />
@@ -13,30 +13,30 @@
   </div>
 </template>
 <script>
-import righthead from '../layouts/header/righthead.vue'
-import lefthead from '../layouts/header/lefthead.vue'
-import Section from '../components/Section.vue'
-import { ref } from 'vue'
+import righthead from "../layouts/header/righthead.vue";
+import lefthead from "../layouts/header/lefthead.vue";
+import Section from "../components/Section.vue";
+import { ref } from "vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     righthead,
     lefthead,
-    Section
+    Section,
   },
   setup() {
-    let imgsrc
+    let imgsrc;
     try {
       //Check availability
-      imgsrc = ref(require('@/assets/images/slanted-background.png'))
+      imgsrc = ref(require("@/assets/images/slanted-background.png"));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
     return {
-      imgsrc
-    }
-  }
-}
+      imgsrc,
+    };
+  },
+};
 </script>
 <style scoped>
 .Section-bg {

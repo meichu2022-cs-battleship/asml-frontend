@@ -13,18 +13,24 @@
       solution），量測可以快速測量矽晶圓上的成像表現，及時回傳數據給微影系統，以確保在量產晶片的狀態下能維持穩定的微影效能。
       我們的檢測系統則有助於在數十億個圖案中，定位和分析單個晶片缺陷。<br />歡迎大家一起微影創新，改變世界！
     </p>
-    <a
-      href="http://localhost:8080/Contact"
+    <button
+      :onClick="goToUpload"
       class="btn text-light fw-bold px-sm-4 py-sm-3 Stars"
-      >Start Detect</a
     >
+      Start Inspection!
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'lefthead'
-}
+  name: "lefthead",
+  methods: {
+    goToUpload() {
+      this.$router.push({ name: "Contact" });
+    },
+  },
+};
 </script>
 
 <style scoped>

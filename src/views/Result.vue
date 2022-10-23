@@ -1,6 +1,6 @@
 <template>
   <div class="content py-sm-5 bg-custom">
-    <div class="container-fluid mt-5 width-limit">
+    <div class="container-fluid width-limit">
       <!-- Top Row -->
       <div class="row p-5 text-light">
         <h1 class="title fw-bold">Defect Inspection Results</h1>

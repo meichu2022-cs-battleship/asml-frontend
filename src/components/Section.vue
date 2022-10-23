@@ -1,20 +1,14 @@
 <template>
   <!-- View More -->
-  <div class="my-5">
-    <a
-      href="https://2022.meichuhackathon.org/ASML.pdf"
-      class="text-center text-decoration-none text-pin fw-bold mt-2"
-      >Official Document</a
-    >
-  </div>
+  <div class="my-5"></div>
 </template>
 
 <script>
-import { toRefs } from 'vue'
+import { toRefs } from "vue";
 export default {
-  name: 'Section',
+  name: "Section",
   setup() {
-    let profiles
+    let profiles;
 
     try {
       //Check availability
@@ -27,18 +21,18 @@ export default {
       //  grid: require('@/assets/images/grid.jpg')
       //})
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
     return {
-      ...toRefs(profiles)
-    }
-  }
-}
+      ...toRefs(profiles),
+    };
+  },
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Festive&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Festive&family=Varela+Round&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Festive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Festive&family=Varela+Round&display=swap");
 .up {
   cursor: pointer;
 }
@@ -55,8 +49,8 @@ export default {
   box-shadow: 5px 4px 3px rgb(180, 180, 180);
 }
 .card-p {
-  font-family: 'Festive', cursive;
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Festive", cursive;
+  font-family: "Varela Round", sans-serif;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .text-pin {
@@ -75,7 +69,7 @@ export default {
   background-color: #a1366a;
 }
 .bg-pink > h3 {
-  font-family: 'Festive', cursive;
+  font-family: "Festive", cursive;
   text-shadow: 2px 2px 4px #000000;
 }
 </style>
