@@ -1,21 +1,71 @@
 <template>
   <div class="content pt-sm-5 bg-custom">
+    <div class="overlay" v-if="loading">
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <br/>
+    </div>
     <div class="container-fluid pt-3">
       <div class="row p-5 text-light">
         <!-- Contact Title -->
         <!-- Column -->
         <div class="col-sm text-start mx-5">
-          <div class="row">
+          <div class="row justify-content-center">
             <!-- Contact Form -->
-            <form @submit.prevent="valide">
+            <form class="w-75" @submit.prevent="valide">
               <!-- Full Name -->
               <h1 class="title text-start fw-bold">
-                Upload your image check the result on our web and both on email
+                Semiconductor Inspect Detection
               </h1>
-              <div class="col-sm-8 mb-3">
+
+              <div>
+                <p>Please upload the image of semiconductors for defect inspection.</p>
+                <p><b>TWO</b> images have to be provided.
+                  <ul>
+                    <li>The image that contains defect</li>
+                    <li>The corresponding golden image</li>
+                    
+                  </ul>
+                </p>
+                <p>
+                  The defects will be highlighted in the result.
+                </p>
+              </div>
+              <!-- Image -->
+              <div class="row">
+                <div class="mb-3 mx-1 col">
+                  <label for="image" class="form-label"
+                    ><b>Your golden image:</b></label
+                  >
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="previewImage($event, 2)"
+                  />
+                </div>
+                <div class="mb-3 mx-1 col">
+                  <label for="image" class="form-label"
+                    ><b>Your defect image:</b>&nbsp;
+                  </label>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="previewImage($event, 1)"
+                  />
+                </div>
+              </div>
+              <!-- Email Address -->
+              <div>
+                <h3>Email Summary</h3>
+                <p>If you would like to recieve an email summary of the inspection, please fill in your info below.</p>
+              </div>
+              <div class="mb-3">
                 <label for="exampleFormControlInput0" class="form-label"
-                  >Your Name</label
-                >
+                  >Your Name <small>(optional)</small>
+                </label>
                 <input
                   type="text"
                   class="form-control"
@@ -24,10 +74,9 @@
                   v-model="fullname.fnvalue"
                 />
               </div>
-              <!-- Email Address -->
-              <div class="col-sm-8 mb-3">
+              <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"
-                  >Email address</label
+                  >Email address <small>(optional)</small></label
                 >
                 <input
                   type="email"
@@ -40,31 +89,6 @@
                   >Incorrect Email Address.</small
                 >
               </div>
-              <!-- Image -->
-              <div class="row">
-                <div class="mb-3 mx-1 col">
-                  <label for="image" class="form-label"
-                    >Your golden image</label
-                  >
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    @change="previewImage($event, 2)"
-                  />
-                </div>
-                <div class="mb-3 mx-1 col">
-                  <label for="image" class="form-label"
-                    >Your defect image&nbsp;
-                  </label>
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    @change="previewImage($event, 1)"
-                  />
-                </div>
-              </div>
               <!-- Message -->
               <div class="col-sm-8 mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label"
@@ -73,19 +97,21 @@
                 <textarea
                   class="form-control"
                   id="exampleFormControlTextarea1"
-                  rows="5"
+                  rows="2"
                   placeholder="Message"
                   v-model="message.msgvalue"
                 ></textarea>
               </div>
               <!-- Submit -->
-              <button
+              <div class="d-flex justify-content-center">
+                <button
                 type="submit"
-                class="btn btn-secondary"
+                class="btn btn-primary px-5 py-2"
                 v-on:click="submit"
               >
-                <fa :icon="['fas', 'save']" class="me-2" />Submit
+                Detect!
               </button>
+              </div>
             </form>
           </div>
         </div>
@@ -144,7 +170,8 @@ export default {
     return {
       preview_origin: null,
       preview_golden: null,
-      images: []
+      images: [],
+      loading: false
     }
   },
   methods: {
@@ -166,15 +193,19 @@ export default {
     },
 
     submit: function () {
-      // preprosessing for backend
       const base64_origin = this.preview_origin.split(',')[1]
       const base64_golden = this.preview_golden.split(',')[1]
-
+      const name = this.fullname.fnvalue
+      const email = this.email.emailvalue
+      const comment = this.message.msgvalue
       const { sendImage } = utils
-
+      this.loading = true
       sendImage({
         origin_image: base64_origin,
-        golden_image: base64_golden
+        golden_image: base64_golden,
+        user_name: name,
+        user_email: email,
+        user_comment: comment
       }).then((res) => {
         //console.log(res)
         //console.log('check:', res.data)
@@ -184,20 +215,26 @@ export default {
         Object.keys(resultObj).forEach((key) => {
           resultObj[key] = `${prefix}${resultObj[key]}`
         })
-        this.$router.push({
-          name: 'Result',
-          params: {
-            golden_image: `${prefix}${base64_golden}`,
-            defect_image: `${prefix}${base64_origin}`,
-            sem_gds: resultObj['sem_gds'],
-            sem_gds_r_rect: resultObj['sem_gds_r_rect'],
-            sem_gds_g_rect: resultObj['sem_gds_g_rect'],
-            sem_gds_rg_rect: resultObj['sem_gds_rg_rect'],
-            sem_r_rect: resultObj['sem_r_rect'],
-            sem_g_rect: resultObj['sem_g_rect'],
-            sem_rg_rect: resultObj['sem_rg_rect']
-          }
-        })
+        this.loading = false
+        this.$router
+          .push({
+            name: 'Result',
+            params: {
+              golden_image: `${prefix}${base64_golden}`,
+              defect_image: `${prefix}${base64_origin}`,
+              sem_gds: resultObj['sem_gds'],
+              sem_gds_r_rect: resultObj['sem_gds_r_rect'],
+              sem_gds_g_rect: resultObj['sem_gds_g_rect'],
+              sem_gds_rg_rect: resultObj['sem_gds_rg_rect'],
+              sem_r_rect: resultObj['sem_r_rect'],
+              sem_g_rect: resultObj['sem_g_rect'],
+              sem_rg_rect: resultObj['sem_rg_rect']
+            }
+          })
+          .catch((error) => {
+            this.loading = false
+            console.error(error)
+          })
       })
     }
   },
@@ -272,5 +309,19 @@ export default {
 <style scoped>
 .bg-custom {
   background-image: linear-gradient(to right, rgb(177, 177, 215), #4d58d8);
+}
+.btn-asml {
+  background-color: #0f238c;
+}
+
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  height: 150vh;
+  background-color: black;
+  opacity: 0.5;
 }
 </style>

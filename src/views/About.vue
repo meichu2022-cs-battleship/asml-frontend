@@ -7,11 +7,11 @@
         <!-- Column -->
         <div class="col-sm px-5">
           <h4 class="text-capitalize text-start mt-5 mb-3 style fw-bold">
-            What is MK template
+            We are 5 senior students from NYCU CS.
           </h4>
 
           <a
-            href="https://github.com/mohammedmoutawakkil/MKTemplate"
+            href="https://github.com/meichu2022-cs-battleship"
             class="btn text-uppercase text-light fw-bold px-sm-4 py-sm-3 Stars"
             >Github Star</a
           >
@@ -40,7 +40,7 @@ export default {
 
     try {
       //Check availability
-      imgsrc = ref(require('@/assets/images/about.jpg'))
+      imgsrc = ref(require('@/assets/images/shoot.jpg'))
     } catch (error) {
       console.error(error)
     }

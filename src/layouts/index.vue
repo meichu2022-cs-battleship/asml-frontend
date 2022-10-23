@@ -11,23 +11,26 @@
     </div>
   </div>
   <!--footer  -->
-  <foot :class="'footer ' + display" />
+  <foot class="" />
 </template>
 
 <script>
-import navbar from '../components/navbar.vue'
-import foot from '../components/foot.vue'
+import navbar from "../components/navbar.vue";
+import foot from "../components/foot.vue";
 export default {
-  name: 'index',
+  name: "index",
   setup() {
-    return {}
+    return {};
   },
   components: {
     navbar,
-    foot
-  }
-}
+    foot,
+  },
+};
 </script>
 
 <style scoped>
+.full-height {
+  height: 100vh;
+}
 </style>

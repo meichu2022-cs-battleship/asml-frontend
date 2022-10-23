@@ -1,26 +1,38 @@
 <template>
-  <div class="container-fluid p-more">
-    <p class="text-center text-capitalize" style="color: #0b1a8c">
-      交大資工宇宙戰艦
-    </p>
+  <div
+    class="
+      footer
+      d-flex
+      flex-column
+      pt-3
+      justify-content-center
+      align-items-center
+    "
+  >
+    <div class="" style="color: #0b1a8c">
+      交大資工宇宙戰艦 | 2022 新竹 X 梅竹黑客松
+    </div>
+    <div>
+      <small>Hackathon Topic 2: Wafer Defect Inspection</small>
+    </div>
   </div>
 </template>
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 export default {
-  name: 'foot',
+  name: "foot",
   setup() {
     //Copyright Date
-    const date = ref(new Date().getFullYear())
+    const date = ref(new Date().getFullYear());
     return {
-      date
-    }
-  }
-}
+      date,
+    };
+  },
+};
 </script>
 
 <style scoped>
-.p-more {
-  padding-top: 50px;
+.footer {
+  height: 10rem;
 }
 </style>

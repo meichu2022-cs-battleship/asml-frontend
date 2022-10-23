@@ -1,6 +1,6 @@
 <template>
   <div class="content py-sm-5 bg-custom">
-    <div class="container-fluid mt-5 width-limit">
+    <div class="container-fluid width-limit">
       <!-- Top Row -->
       <div class="row p-5 text-light">
         <h1 class="title fw-bold">Defect Inspection Results</h1>
@@ -63,7 +63,9 @@
             align-items-center
           "
         >
-          <div class="text-start">選擇要檢視的內容標記</div>
+          <div class="text-start">
+            <h6>Select the labels to display on top of the sem image:</h6>
+          </div>
           <div class="form-container w-50 ml-5">
             <div class="form-check">
               <input
@@ -72,8 +74,8 @@
                 v-model="goldenImageSelected"
                 id="goldenImage"
               />
-              <label class="form-check-label" for="goldenImage">
-                Golden Image
+              <label class="form-check-label text-start" for="goldenImage">
+                <b>Label:</b> Golden Image
               </label>
             </div>
             <div class="form-check">
@@ -83,7 +85,9 @@
                 v-model="hollowSelected"
                 id="hollow"
               />
-              <label class="form-check-label" for="hollow"> hollow </label>
+              <label class="form-check-label" for="hollow">
+                <span class="text-hollow">Defect:</span> Knecking, Lie-end
+              </label>
             </div>
             <div class="form-check">
               <input
@@ -92,8 +96,13 @@
                 v-model="buldgeSelected"
                 id="buldge"
               />
-              <label class="form-check-label" for="buldge"> buldge </label>
+              <label class="form-check-label" for="buldge">
+                <span class="text-buldge">Defect:</span> Bridge, Lie-end
+              </label>
             </div>
+          </div>
+          <div>
+            The golden image will be masked on the sem image if selected.
           </div>
         </div>
       </div>
@@ -146,8 +155,8 @@ export default {
   data() {
     return {
       goldenImageSelected: true,
-      hollowSelected: false,
-      buldgeSelected: false,
+      hollowSelected: true,
+      buldgeSelected: true,
       images: [],
     };
   },
@@ -273,5 +282,15 @@ p {
 .sample-img {
   width: 200px;
   height: 200px;
+}
+
+.text-hollow {
+  color: red;
+  font-weight: bold;
+}
+
+.text-buldge {
+  color: #00ff00;
+  font-weight: bold;
 }
 </style>
