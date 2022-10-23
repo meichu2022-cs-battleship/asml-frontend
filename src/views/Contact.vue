@@ -166,6 +166,7 @@ export default {
     },
 
     submit: function () {
+      // preprosessing for backend
       const base64_origin = this.preview_origin.split(',')[1]
       const base64_golden = this.preview_golden.split(',')[1]
 
